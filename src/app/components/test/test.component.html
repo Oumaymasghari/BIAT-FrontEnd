@@ -1,0 +1,49 @@
+<div class="create-post">
+    <div class="create-post-container">
+        <img class="profile-pic" src="{{loggedInUser.profilePic}}" alt="Profile Picture">
+        <div class="create-post-user">{{loggedInUser.name}}</div>
+    </div>
+    <div class="create-post-form">
+        <textarea [(ngModel)]="newPost.content" name="content" placeholder="What's on your mind?"></textarea>
+        <button class="create-post-button" (click)="createPost()">Post</button>
+    </div>
+</div>
+
+
+<div *ngFor="let post of posts">
+    <div class="post">
+        <div class="post-header">
+            <img [src]="post.user.profilePic" class="profile-pic">
+            <h2>{{ post.user.name }}</h2>
+            <p>{{ post.date | date: 'medium' }}</p>
+        </div>
+        <div class="post-content">
+            <p>{{ post.content }}</p>
+        </div>
+        <div class="post-actions">
+            <button (click)="like(post)">
+                <i class="fa fa-heart"></i>{{ post.likes }}
+            </button>
+            <button (click)="onComment(post)">
+                <i class="fa fa-comment"></i>
+                <span>Comment</span>
+            </button>
+        </div>
+        <div class="post-comments">
+            <div *ngFor="let comment of post.comments" class="comment">
+                <img [src]="comment.user.profilePic" class="profile-pic">
+                <div class="comment-content">
+                    <h3>{{ comment.user.name }}</h3>
+                    <p>{{ comment.date | date: 'medium' }}</p>
+                    <p>{{ comment.content }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="post-add-comment">
+            <form (ngSubmit)="onComment(post)">
+                <input type="text" [(ngModel)]="newComment" placeholder="Add a comment...">
+                <button type="submit">Post</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+.post-reactions {
+    position: relative;
+   // display: flex;
+  // height: 40px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  
+  }
+  
+  .reactions-button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
+  
+  }
+  
+  .reactions-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    padding: 8px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .reaction {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4px;
+    cursor: pointer;
+  }
+  
+  .reaction span {
+    font-size: 24px;
+  }
+  
+  .current-reaction {
+    display: flex;
+    align-items: center;
+   
+  }
+  
+  .current-reaction span {
+    font-size: 24px;
+    color: #1877f2;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+//222222222222
+
+
+
+
+
+
+
+// .reactions-button {
+//     position: relative;
+//     padding: 8px;
+//     border: none;
+//     border-radius: 4px;
+//     background-color: #eee;
+//     color: #333;
+//     font-size: 16px;
+//   }
+  
+//   .emoji-icon {
+//     display: inline-block;
+//     width: 20px;
+//     height: 20px;
+//     margin-right: 8px;
+//     font-size: 20px;
+//     animation: pulse 1s ease-in-out infinite;
+//   }
+  
+//   @keyframes pulse {
+//     0% {
+//       transform: scale(1);
+//     }
+//     50% {
+//       transform: scale(1.2);
+//     }
+//     100% {
+//       transform: scale(1);
+//     }
+//   }
+  
+//   .reactions-popup {
+//     position: absolute;
+//     top: 36px;
+//     left: 0;
+//     width: 120px;
+//     padding: 8px;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     background-color: #fff;
+//     z-index: 10;
+//   }
+  
+//   .reaction {
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     margin-bottom: 4px;
+//     cursor: pointer;
+//   }
+  
+//   .reaction:hover {
+//     background-color: #eee;
+//   }
+  
+//   .current-reaction {
+//     margin-top: 4px;
+//     font-size: 16px;
+//     font-weight: bold;
+//     color: #666;
+//   }
+  

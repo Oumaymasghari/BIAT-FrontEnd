@@ -1,0 +1,35 @@
+ <div class="post-reactions">  
+    <div class="reactions-popup" *ngIf="showReactions">
+      <div class="reaction" *ngFor="let reaction of reactions" (click)="onReactionClick(reaction)">
+        <span>{{reaction}}</span>
+      </div>     
+    </div> 
+    <button class="reactions-button"  (click)="toggleReactions()">
+        <i class="fa fa-smile" ></i> 
+      </button>
+      <div class="current-reaction" style="display: inline-block;" *ngIf="currentReaction">
+        <span >{{currentReaction}}</span>
+      </div>
+  </div>
+
+   
+  
+
+
+
+<!-- 222222222222222 -->
+<!-- 
+   <div class="post-reactions">
+    <button class="reactions-button" (click)="toggleReactions()">
+      <i class="emoji-icon">{{ currentReaction }}</i> React
+    </button>
+    <div class="reactions-popup" *ngIf="showReactions">
+      <div class="reaction" *ngFor="let reaction of reactions" (click)="onReactionClick(reaction)">
+        <span>{{reaction}}</span>
+      </div>
+    </div>
+    <div class="current-reaction" *ngIf="currentReaction">
+      <span>{{ currentReaction }}</span>
+    </div>
+  </div>
+   -->

@@ -1,0 +1,183 @@
+<div class=" content">
+    <div class=" row">
+        <div class=" col-md-12">
+            <div class="create-post">
+                <form >
+                    <input type="hidden" name="userId" value="{{ currentUser.id }}">
+                    <div class="create-post-container" >
+                        <!-- <img class="profile-pic" src="{{currentUser.profilePic}}" alt="Profile Picture"> -->
+                        <h3 class="create-post-user">{{currentUser.username}}</h3>
+                    </div>
+                    <div class=" row">
+                        
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> heure de depart </label>
+                                <input class=" form-control" placeholder="heure de depart" type="text"
+                                [(ngModel)]="covoiturage.heureDepart"  name="nom"/>
+                            </div>
+                        </div>
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> depart </label>
+                                <input class=" form-control" placeholder="depart" type="text"
+                                [(ngModel)]="covoiturage.depart"  />
+                            </div>
+                        </div>
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> arrive </label>
+                                <input class=" form-control" placeholder="arrive" type="text"
+                                [(ngModel)]="covoiturage.arrivee"  />
+                            </div>
+                        </div>
+                        
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> date depart </label>
+                                <input class=" form-control" placeholder="date depart " type="date"
+                                [(ngModel)]="covoiturage.datedepart"  />
+                            </div>
+                        </div>
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> nombre personne </label>
+                                <input class=" form-control" placeholder="nombre personne" type="number"
+                                [(ngModel)]="covoiturage.nbPersonne"  />
+                            </div>
+                        </div>
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> prix par personne </label>
+                                <input class=" form-control" placeholder="prix par personne " type="number"
+                                [(ngModel)]="covoiturage.prix"  />
+                            </div>
+                        </div>
+                        <div class=" col-md-3 px-md-1">
+                            <div class=" form-group">
+                                <label> numero a contacter  </label>
+                                <input class=" form-control" placeholder="numero a contacter" type="text"
+                                [(ngModel)]="covoiturage.contactNumber"  />
+                            </div>
+                        </div>
+                        <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
+                        margin-left: 10px;" (click)="addcov(covoiturage)">Post</button>
+                    </div>
+                </form>
+                <!-- <div class="create-post-container">
+                    <img class="profile-pic" src="{{loggedInUser.profilePic}}" alt="Profile Picture">
+                    <div class="create-post-user">{{loggedInUser.name}}</div>
+                </div>
+                <div class="create-post-form">
+                    <textarea class="ta" [(ngModel)]="newPost.content" name="content"
+                        placeholder="What's on your mind?"></textarea>
+                    <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
+                    margin-left: 10px;" (click)="createPost()">Post</button>
+                </div> -->
+            </div>
+
+
+            <div *ngFor="let covoiturage of listPostsCov">
+                <div class=" card post">
+
+                    <div class="post-header">
+                        <!-- <img [src]="post.user.profilePic" class="profile-pic"> -->
+                        <h3>{{ covoiturage.user.username }}</h3>
+                        <p>{{ currentUser.date | date: 'medium' }}</p>
+                    </div>
+                    <div class="post-content">
+                        <p>bonjour ,
+                            <br> je vous propose covoiturage de {{ covoiturage.depart }} vers  {{ covoiturage.arrivee }} a  
+                            {{ covoiturage.heureDepart }}  ,le {{ covoiturage.dateDepart }} pour {{ covoiturage.nbPersonne }} a 
+                            {{ covoiturage.prix }} dt par personne , pour la confirmation veuillez me contacter sur {{ covoiturage.contactNumber }}</p>
+                    </div>
+
+                    <!-- <button (click)="like(post)">
+                            <i class="fa fa-heart" style="color: rgb(187, 0, 0);"></i> 
+                            <div style="color: rgb(151, 147, 147); padding-left: 10px;"> {{ post.likes }}</div>
+                           
+                        </button> -->
+
+
+
+                 <!-- eli tekhdem -->
+
+                        <div class="post-reactions" >
+                            <!-- <button style="display: inline;" class="reactions-button"  (click)="toggleReactions()">
+                                <i class="fa fa-smile"></i>
+                          </button>
+
+                            <div class="reactions-popup" *ngIf="showReactions" >
+                                <div class="reaction" *ngFor="let reaction of reactions"
+                                    (click)="onReactionClick(reaction)">
+                                    <span>{{reaction}}</span>
+                                </div>
+                            </div>                         
+                            
+                            <div class="current-reaction" style="display: inline;" *ngIf="currentEmoji">
+                                <span>{{currentEmoji}}</span>
+                            </div> -->
+                            <div class="reactions">
+                                <button (click)="addReaction('😀')"><span class="emoji">&#128512;</span> {{ covoiturage.likeCount }}</button>
+                                <button (click)="addReaction('😍')"><span class="emoji">&#128525;</span> {{ covoiturage.loveCount }}</button>
+                                <button (click)="addReaction('👍')"><span class="emoji">&#128077;</span> {{ covoiturage.thumbsUpCount }}</button>
+                                <button (click)="addReaction('👎')"><span class="emoji">&#128078;</span> {{ covoiturage.thumbsDownCount }}</button>
+                                <button (click)="addReaction('🎉')"><span class="emoji">&#127881;</span> {{ covoiturage.celebrationCount }}</button>
+                              </div>
+                        </div>
+
+
+<!-- <div class="reactions">
+  <span class="reaction">
+    <span class="emoji">&#128077;</span> {{ covoiturage.likeCount }}
+  </span>
+  <span class="reaction">
+    <span class="emoji">&#128525;</span> {{ covoiturage.loveCount }}
+  </span>
+  <span class="reaction">
+    <span class="emoji">&#128077;</span> {{ covoiturage.thumbsUpCount }}
+  </span>
+  <span class="reaction">
+    <span class="emoji">&#128078;</span> {{ covoiturage.thumbsDownCount }}
+  </span>
+  <span class="reaction">
+    <span class="emoji">&#127881;</span> {{ covoiturage.celebrationCount }}
+  </span>
+</div>
+ -->
+
+                        <!-- <div class="post-actions" style="display: inline-block;">
+                            <button (click)="onComment(post)">
+                                <i class="fa fa-comment" style="color: #999"></i>
+                                <span style="color: rgb(151, 147, 147); ">Comment</span>
+                            </button>
+                        </div> -->
+
+<!-- commentaire  -->
+
+
+                 
+                    <!-- <div class="post-comments">
+                        <div *ngFor="let comment of PostComment.comment_text" class="comment">
+                            <img [src]="comment.user.profilePic" class="profile-pic">
+                            <div class="comment-content">
+                                <h4>{{currentUser.username}}</h4>
+                                <p>{{ comment.comment_date | date: 'medium' }}</p>
+                                <p>{{ comment.comment_text }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-add-comment">
+                        <form (ngSubmit)="onComment(PostComment)">
+                            <input class=" form-control" type="text" [(ngModel)]="newComment"
+                                placeholder="Add a comment...">
+                            <button type="submit">Post</button>
+                        </form>
+
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>

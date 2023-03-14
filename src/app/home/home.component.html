@@ -1,0 +1,116 @@
+<div class="background" style="background-image: url(./assets/img/Background.jpg);">
+
+  <div class="logo">
+    <img src="./assets/img/logo.png" height="70" width="70" alt="">
+  </div>
+  <div class="title">
+    <h2>BIAT NETWORK</h2>
+    <h1>Communication made simple</h1>
+  </div>
+
+  <div class="box">
+    <div class="form">
+      <form autocomplete="off"  >
+        <h2>Sign in</h2>
+        <div class="inputBox">
+          <input type="text" required="required" [(ngModel)]="form1.username" required #username="ngModel">
+          <span>Userame</span>
+          <i></i>
+        </div>
+        <div class="inputBox">
+          <input type="password" required="required" [(ngModel)]="form1.password" required minlength="6"
+            #password="ngModel">
+          <span>Password</span>
+          <i></i>
+        </div>
+        <div class="links">
+          <a href="#">Forgot Password ?</a>
+          <a  (click)="openModal()">Signup</a>
+          <!-- Modal -->
+          <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal}" style="display: block;">
+
+            <div class="modal modal-content">
+
+              <div class="modal-body">
+                <form autocomplete="off" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()"
+                  #f="ngForm" novalidate>
+                  <h2>Sign up</h2>
+                  <div class="inputBox">
+                    <input type="text" required="required" [(ngModel)]="form.username" required minlength="3"
+                      maxlength="20" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }">
+                    <span>Userame</span>
+                    <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
+                      <div *ngIf="username.errors['required']">Username is required</div>
+                      <div *ngIf="username.errors['minlength']">
+                        Username must be at least 3 characters
+                      </div>
+                      <div *ngIf="username.errors['maxlength']">
+                        Username must be at most 20 characters
+                      </div>
+                    </div>
+                    <i></i>
+                  </div>
+                  <div class="inputBox">
+                    <input type="email" required="required" [(ngModel)]="form.email" required email #email="ngModel"
+                      [ngClass]="{ 'is-invalid': f.submitted && email.errors }">
+                    <span>Email</span>
+                    <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+                      <div *ngIf="email.errors['required']">Email is required</div>
+                      <div *ngIf="email.errors['email']">
+                        Email must be a valid email address
+                      </div>
+                    </div>
+                    <i></i>
+                  </div>
+                  <div class=" row">
+                    <div class="inputBox">
+                      <input type="password" required="required" [(ngModel)]="form.password" required minlength="6"
+                        #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }">
+                      <span>Password</span>
+                      <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+                        <div *ngIf="password.errors['required']">Password is required</div>
+                        <div *ngIf="password.errors['minlength']">
+                          Password must be at least 6 characters
+                        </div>
+                      </div>
+                      <i></i>
+                    </div>
+
+                    <div class=" col-md-4 pr-md-1" style="width:150px; padding-left:20px; padding-right:30px;">
+                    <span> Role</span>
+                    <select name="dropdownOption" id="dropdownOption"
+                      class='form-control  dropdown-danger dropdown-menu-right ' [(ngModel)]="form.role" required="required" name="Role">
+                      <option class="dropdown-item" value="admin">ROLE_RH</option>
+                      <option class="dropdown-item" value="ROLE_PERSONNEL">ROLE_PERSONNEL</option>
+
+                    </select>
+                  </div>
+                  </div>
+
+                  <div class="modal-footer" style="padding-top: 40px;">
+                    <button class="bt1" (click)="closeModal()">Close</button>
+                    <button class="bt2" (click)="onSubmit() "  routerLink="/home" >Create account</button>
+                  </div>
+                  <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Signup failed!<br />{{ errorMessage }}
+                  </div> -->
+                </form>
+                
+                <div class="alert alert-success" *ngIf="isSuccessful">
+                  Your registration is successful!
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+         
+        </div>
+        <input type="submit" value="Login" (click)="login()" >
+        
+      </form>
+
+    </div>
+  </div>
+
+</div>
