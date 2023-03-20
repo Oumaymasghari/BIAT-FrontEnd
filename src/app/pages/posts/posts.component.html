@@ -83,7 +83,7 @@
                     <div class="post-header">
                         <!-- <img [src]="post.user.profilePic" class="profile-pic"> -->
                         <h3>{{ covoiturage.user.username }}</h3>
-                        <p>{{ currentUser.date | date: 'medium' }}</p>
+                        <p>{{ covoiturage.datePost | date: 'medium' }}</p>
                     </div>
                     <div class="post-content">
                         <p>bonjour ,
@@ -118,11 +118,11 @@
                                 <span>{{currentEmoji}}</span>
                             </div> -->
                             <div class="reactions">
-                                <button (click)="addReaction('😀')"><span class="emoji">&#128512;</span> {{ covoiturage.likeCount }}</button>
-                                <button (click)="addReaction('😍')"><span class="emoji">&#128525;</span> {{ covoiturage.loveCount }}</button>
-                                <button (click)="addReaction('👍')"><span class="emoji">&#128077;</span> {{ covoiturage.thumbsUpCount }}</button>
-                                <button (click)="addReaction('👎')"><span class="emoji">&#128078;</span> {{ covoiturage.thumbsDownCount }}</button>
-                                <button (click)="addReaction('🎉')"><span class="emoji">&#127881;</span> {{ covoiturage.celebrationCount }}</button>
+                                <button (click)="addReaction(covoiturage.id,'😀')"> <span class="emoji">😀</span> {{ covoiturage.likeCount }}</button>
+                                <button (click)="addReaction(covoiturage.id,'😍')"><span class="emoji">😍</span> {{ covoiturage.loveCount }}</button>
+                                <button (click)="addReaction(covoiturage.id,'👍')"><span class="emoji">👍</span> {{ covoiturage.thumbsUpCount }}</button>
+                                <button (click)="addReaction(covoiturage.id,'👎')"><span class="emoji">👎</span> {{ covoiturage.thumbsDownCount }}</button>
+                                <button (click)="addReaction(covoiturage.id,'🎉')"><span class="emoji">🎉</span> {{ covoiturage.celebrationCount }}</button>
                               </div>
                         </div>
 

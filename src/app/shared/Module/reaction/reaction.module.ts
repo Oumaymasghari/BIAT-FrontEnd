@@ -13,6 +13,7 @@ import { CovoiturageModule } from '../covoiturage/covoiturage.module';
 export class ReactionModule {
   id: number;
   emoji: string;
+  count:any;
   covoiturage : CovoiturageModule;
 
  }

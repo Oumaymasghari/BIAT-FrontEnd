@@ -13,8 +13,7 @@ export class CovoiturageService {
   constructor(private httpClient: HttpClient,private userservice: UserService) { }
 
   addCovoiturage(cov: any) {
-    const currentUser = this.userservice.getCurrentUser();
-    cov.user = currentUser;
+    
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this.userservice.getToken()}`
     });
@@ -24,18 +23,18 @@ export class CovoiturageService {
     
     return this.httpClient.get(`${this.API_URL}/retrieve-all-Covoiturage`) ;
   }
-  addReaction(postId: any, reaction: string): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.userservice.getToken()}`
-    });
-    return this.httpClient.post(`${this.API_URL}/reactions/${postId}`, reaction,{ headers: headers })
-      .pipe(
-        catchError(this.handleError)
-      );
+  addReaction(postId: any, reaction: any): Observable<any> {
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json;charset=UTF-8',
+        Authorization: `Bearer ${this.userservice.getToken()}`
+      })
+    };
+
+    return this.httpClient.post(`${this.API_URL}/reactions/${postId}`,JSON.stringify(reaction), httpOptions);
+      
   }
   
-  private handleError(error: any) {
-    console.error(error);
-    return throwError('An error occurred');
-  }
+ 
 }

@@ -31,10 +31,10 @@ export class PostsComponent implements OnInit {
     this.currentUser = this.storageService.getUser();
   this.getAllcov();
   this.covoiturage={
+      id:null,
       user:{
       username:null
-      },
-      id:null,
+      },     
       heureDepart :null,
       depart :null,
       arrivee :null,
@@ -43,7 +43,7 @@ export class PostsComponent implements OnInit {
       prix :null,
       contactNumber :null,
       // Reaction properties
-      likeCount:null,
+      likeCount:0,
       loveCount: null,
       thumbsUpCount: null,
       thumbsDownCount: null,
@@ -74,9 +74,9 @@ reactions = ['😀', '😍', '👍', '👎', '🎉'];
     this.showReactions = !this.showReactions;
   }
 ///second attemt mtaa reaction 
-addReaction(reaction: any) {
-  console.log(JSON.stringify(this.covoiturage.id));
-  this.covoiturageService.addReaction(this.covoiturage.id, reaction)
+addReaction(id:any,reaction: any): void  {
+ // console.log(JSON.stringify(this.covoiturage.id));
+  this.covoiturageService.addReaction(id, reaction)
     .subscribe(
       response => {
         // Update the post with the new reaction count
@@ -84,6 +84,9 @@ addReaction(reaction: any) {
       },
       error => console.error(error)
     );
+    const currentUser = this.userservice.getCurrentUser();
+    this.covoiturageForm.value.user = currentUser.id;
+  
 }
 
 
@@ -125,7 +128,7 @@ isAuthenticated(): boolean {
   return this.userservice.isAuthenticated();
 }
 addcov(covoiturage:any): void {
-  
+  console.log(JSON.stringify(this.covoiturage.id));
   console.log("user " + JSON.stringify(this.storageService.getUser()));
   this.covoiturageService.addCovoiturage(covoiturage).subscribe(
     () => {

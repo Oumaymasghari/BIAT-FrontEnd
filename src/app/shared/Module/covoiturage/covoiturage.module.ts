@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class CovoiturageModule { 
 
-id:any
+  id:number;
  heureDepart :any;
  depart :any;
  arrivee :any;
@@ -23,11 +23,11 @@ id:any
 datePost:any;
 user:any;
 // Reaction properties
-likeCount: number;
-loveCount: number;
-thumbsUpCount: number;
-thumbsDownCount: number;
-celebrationCount: number;
+likeCount: number = 0 ;
+loveCount: number = 0;
+thumbsUpCount: number= 0;
+thumbsDownCount: number= 0;
+celebrationCount: number= 0;
 
 
 constructor() {
