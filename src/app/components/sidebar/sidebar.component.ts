@@ -1,4 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { combineLatest, forkJoin, map, of } from "rxjs";
+import { ERoleModule } from "src/app/shared/Module/erole/erole.module";
+import { UserService } from "src/app/shared/Services/user/user.service";
 
 declare interface RouteInfo {
   path: string;
@@ -6,15 +9,16 @@ declare interface RouteInfo {
   rtlTitle: string;
   icon: string;
   class: string;
+  roles?: ERoleModule[]; 
 }
 export const ROUTES: RouteInfo[] = [
-  {
-    path: "/dashboard",
-    title: "Dashboard",
-    rtlTitle: "لوحة القيادة",
-    icon: "icon-chart-pie-36",
-    class: ""
-  },
+  // {
+  //   path: "/dashboard",
+  //   title: "Dashboard",
+  //   rtlTitle: "لوحة القيادة",
+  //   icon: "icon-chart-pie-36",
+  //   class: ""
+  // },
   // {
   //   path: "/covoiturage",
   //   title: "Covoiturage",
@@ -23,19 +27,41 @@ export const ROUTES: RouteInfo[] = [
   //   class: ""
   // },
   {
+    path: "/nouvellevente",
+    title: "Nouvelle vente",
+    rtlTitle: "لوحة القيادة",
+    icon: "icon-cloud-download-93",
+    class: "",
+    roles: [ERoleModule.ROLE_RH] // add this property to the menu item
+  },
+  {
     path: "/posts",
     title: "Covoiturage",
     rtlTitle: "لوحة القيادة",
     icon: "icon-bus-front-12",
     class: ""
   },
-  // {
-  //   path: "/icons",
-  //   title: "Icons",
-  //   rtlTitle: "الرموز",
-  //   icon: "icon-atom",
-  //   class: ""
-  // },
+  {
+    path: "/Venteachat",
+    title: "Vente et Achat",
+    rtlTitle: "لوحة القيادة",
+    icon: "tim-icons icon-cart",
+    class: ""
+  },
+  {
+    path: "/Vente",
+    title: "Vente et Achat jdid",
+    rtlTitle: "لوحة القيادة",
+    icon: "tim-icons icon-cart",
+    class: ""
+  },
+  {
+    path: "/icons",
+    title: "Icons",
+    rtlTitle: "الرموز",
+    icon: "icon-atom",
+    class: ""
+  },
   // {
   //   path: "/maps",
   //   title: "Maps",
@@ -50,20 +76,20 @@ export const ROUTES: RouteInfo[] = [
   //   class: ""
   // },
 
-  // {
-  //   path: "/user",
-  //   title: "User Profile",
-  //   rtlTitle: "ملف تعريفي للمستخدم",
-  //   icon: "icon-single-02",
-  //   class: ""
-  // },
-  // {
-  //   path: "/tables",
-  //   title: "Table List",
-  //   rtlTitle: "قائمة الجدول",
-  //   icon: "icon-puzzle-10",
-  //   class: ""
-  // },
+  {
+    path: "/user",
+    title: "User Profile",
+    rtlTitle: "ملف تعريفي للمستخدم",
+    icon: "icon-single-02",
+    class: ""
+  },
+  {
+    path: "/tables",
+    title: "Table List",
+    rtlTitle: "قائمة الجدول",
+    icon: "icon-puzzle-10",
+    class: ""
+  },
   // {
   //   path: "/typography",
   //   title: "Typography",
@@ -88,10 +114,35 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
 
-  constructor() {}
+  constructor(private userservice: UserService ) {}
 
   ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    console.log(ERoleModule.ROLE_RH)
+    this.userservice.getUserRoles().subscribe(userRoles => {
+      console.log('User Roles:', userRoles);
+    });
+  
+   
+    const userRoles$ = this.userservice.getUserRoles();
+
+    combineLatest([userRoles$]).pipe(
+      map(([userRoles]) => {
+        return ROUTES.filter((menuItem) => {
+          if (!menuItem.roles) {
+            // If the menu item has no roles specified, show it to everyone
+            return true;
+          } else if (menuItem.roles.some(role => userRoles.includes(role))) {
+            // If the user has the required permission, show the menu item
+            return true;
+          } else {
+            // Otherwise, hide the menu item
+            return false;
+          }
+        });
+      })
+    ).subscribe(menuItems => {
+      this.menuItems = menuItems;
+    });
   }
   isMobileMenu() {
     if (window.innerWidth > 991) {
@@ -99,4 +150,8 @@ export class SidebarComponent implements OnInit {
     }
     return true;
   }
+
+
+ 
+
 }

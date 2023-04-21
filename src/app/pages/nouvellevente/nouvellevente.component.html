@@ -1,0 +1,47 @@
+<div class=" content">
+  <div class=" row">
+    <div class=" col-md-12">
+      <div class=" card card-plain">
+        <div class=" card-header">
+          <h4 class=" card-title">Des nouvelles ventes sont ajoutées</h4>
+         
+        </div>
+        <div class=" card-body">
+          <div class=" table-responsive">
+            <table class=" table tablesorter" id="">
+              <thead class=" text-primary">
+                <tr>
+                  <th>id</th>
+                  <th>article</th>
+                  <th>date disponibilite</th>
+                  <th>prix </th>
+                  <th>place</th>
+                  <th>type vente</th>
+                  <th>photos </th>
+                  <th>action  </th>
+             
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor='let v of listVente' >
+                  <td style="color: brown;">{{v.id}}</td>
+                  <td>{{v.article}}</td>
+                  <td>{{v.dateDisponibilite}}</td>
+                  <td>{{v.prix}}</td>
+                  <td>{{v.place}}</td>
+                  <td>{{v.typeVente}}</td>
+                  <td>{{v.pictures}}</td>
+                  <td>
+                    <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;" class=" btn btn-fill btn-danger" type="submit" (click)="acceptVente(v.id)" >accepter</button>
+                    <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;" class=" btn btn-fill btn-danger" type="submit" >refuser</button>
+                  </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

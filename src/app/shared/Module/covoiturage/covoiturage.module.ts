@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PostCommentModule } from '../post-comment/post-comment.module';
 
 
 
@@ -22,6 +23,7 @@ export class CovoiturageModule {
 
 datePost:any;
 user:any;
+postComments: PostCommentModule[];
 // Reaction properties
 likeCount: number = 0 ;
 loveCount: number = 0;

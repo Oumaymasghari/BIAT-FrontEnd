@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   form: any = {
     username: null,
     email: null,
-    password: null
+    password: null,
+    role:null
   };
   form1: any = {
     username: null,

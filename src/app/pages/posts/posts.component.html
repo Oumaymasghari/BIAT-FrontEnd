@@ -124,27 +124,12 @@
                                 <button (click)="addReaction(covoiturage.id,'👎')"><span class="emoji">👎</span> {{ covoiturage.thumbsDownCount }}</button>
                                 <button (click)="addReaction(covoiturage.id,'🎉')"><span class="emoji">🎉</span> {{ covoiturage.celebrationCount }}</button>
                               </div>
+                              
+
                         </div>
+                       
 
 
-<!-- <div class="reactions">
-  <span class="reaction">
-    <span class="emoji">&#128077;</span> {{ covoiturage.likeCount }}
-  </span>
-  <span class="reaction">
-    <span class="emoji">&#128525;</span> {{ covoiturage.loveCount }}
-  </span>
-  <span class="reaction">
-    <span class="emoji">&#128077;</span> {{ covoiturage.thumbsUpCount }}
-  </span>
-  <span class="reaction">
-    <span class="emoji">&#128078;</span> {{ covoiturage.thumbsDownCount }}
-  </span>
-  <span class="reaction">
-    <span class="emoji">&#127881;</span> {{ covoiturage.celebrationCount }}
-  </span>
-</div>
- -->
 
                         <!-- <div class="post-actions" style="display: inline-block;">
                             <button (click)="onComment(post)">
@@ -157,24 +142,26 @@
 
 
                  
-                    <!-- <div class="post-comments">
-                        <div *ngFor="let comment of PostComment.comment_text" class="comment">
-                            <img [src]="comment.user.profilePic" class="profile-pic">
+                    <div class="post-comments">
+                        <div *ngFor="let comment of covoiturage.postComments" class="comment comment-separator">
+                            <!-- <img [src]="comment.user.profilePic" class="profile-pic"> -->
                             <div class="comment-content">
-                                <h4>{{currentUser.username}}</h4>
+                                <h4>{{comment.comment_author }}</h4>
                                 <p>{{ comment.comment_date | date: 'medium' }}</p>
-                                <p>{{ comment.comment_text }}</p>
+                                <h5>{{ comment.comment_text }}</h5>
                             </div>
+                            <hr>
                         </div>
+                        
                     </div>
                     <div class="post-add-comment">
-                        <form (ngSubmit)="onComment(PostComment)">
-                            <input class=" form-control" type="text" [(ngModel)]="newComment"
+                        <form (ngSubmit)="addComment(covoiturage.id,comment)">
+                            <input class=" form-control" type="text" [(ngModel)]="comment.comment_text"
                                 placeholder="Add a comment...">
                             <button type="submit">Post</button>
                         </form>
 
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>

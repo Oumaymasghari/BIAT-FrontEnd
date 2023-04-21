@@ -14,6 +14,7 @@ export class PersonneModule {
     id :any ;
 	nom:any ;
     prenom:any ;
+	profilePic:Blob;
     age:any ;
 	cin:any ;
 	email:any ;
@@ -22,5 +23,7 @@ export class PersonneModule {
 	telPersonnel:any ;
 	telPoste:any ;
 	agence :any ;
-	
+	userid:any;
+	profilePicUrl: string;
+
 }

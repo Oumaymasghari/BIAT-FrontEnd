@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { AuthResponseModule } from '../../Module/auth-response/auth-response.module';
+import { ERoleModule } from '../../Module/erole/erole.module';
+import { ROLEModule } from '../../Module/role/role.module';
 
 
 const httpOptions = {
@@ -17,10 +19,11 @@ export class UserService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
  
+  private roles: ROLEModule[] = [];
   private readonly httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private userservice:UserService) {
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
     this.currentUser = this.currentUserSubject.asObservable();
    }
@@ -98,8 +101,45 @@ export class UserService {
     
     return this.http.get(`${this.API_URL}/users/${id}`);
   }
-
-
-
+  public setRoles(roles: ROLEModule[]): void {
+    this.roles = roles;
   }
+  getUserRoles(): Observable<ERoleModule[]> {
+   
+    return this.http.get<ERoleModule[]>(`${this.API_URL}/roles`);
+  }
+  hasRole(roles: ERoleModule[]): Observable<boolean> {
+    if (!roles || roles.length === 0) {
+      // If roles parameter is empty, return false
+      return of(false);
+    }
+  
+    return this.getUserRoles().pipe(
+      map(userRoles => {
+        if (!userRoles || userRoles.length === 0) {
+          // If user roles are empty, return false
+          return false;
+        }
+  
+        return roles.some((role) => userRoles.includes(role));
+      })
+    );
+  }
+ 
+
+  
+  
+  
+  
+  
+  }
+
+  
+  
+  
+  
+  
+
+
+  
 

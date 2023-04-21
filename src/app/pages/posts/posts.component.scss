@@ -67,11 +67,25 @@ h2{
   .post-comments {
     margin: 10px 0;
   }
-  
+  .comment p{
+    font-size: 14px;
+    color: #999;
+    padding-top: 10px;
+    padding-left: 700px;
+  }
+  .comment h5{
+    font-size: 14px;
+    color: #999;
+    padding-top: -10px;
+    padding-left: 70px;
+  }
   .comment {
     display: flex;
     align-items: center;
     margin: 10px 0;
+    border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+ 
   }
   
   .comment img.profile-pic {
@@ -81,8 +95,9 @@ h2{
     margin-right: 10px;
   }
   
-  .comment h3 {
+  .comment h4 {
     margin: 0;
+    font-size: medium;
   }
   
   .comment p {

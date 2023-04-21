@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit , Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthResponseModule } from 'src/app/shared/Module/auth-response/auth-response.module';
 import { CovoiturageModule } from 'src/app/shared/Module/covoiturage/covoiturage.module';
 import { PostCommentModule } from 'src/app/shared/Module/post-comment/post-comment.module';
@@ -24,12 +25,24 @@ export class PostsComponent implements OnInit {
   selectedCount: number;
   listComments:any;
   covoiturageForm: FormGroup;
+  newComment: PostCommentModule = new PostCommentModule();
+  comment: PostCommentModule;
+ 
   constructor(private covoiturageService: CovoiturageService, private storageService: StorageService,
               private userservice:UserService,private http: HttpClient, private postCommentService:PostCommentService,
-             ) { }
+              private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
   this.getAllcov();
+  
+  this.comment={
+    id:null,
+    comment_text:null,
+    comment_author: this.storageService.getUser().username ,
+    comment_date: new Date(),
+    covoiturageId:null,
+  }
+
   this.covoiturage={
       id:null,
       user:{
@@ -42,6 +55,7 @@ export class PostsComponent implements OnInit {
       nbPersonne :null,
       prix :null,
       contactNumber :null,
+      postComments: null,
       // Reaction properties
       likeCount:0,
       loveCount: null,
@@ -52,7 +66,9 @@ export class PostsComponent implements OnInit {
   
   };
   
+ /////comment
  
+
 
   }
 
@@ -90,37 +106,6 @@ addReaction(id:any,reaction: any): void  {
 }
 
 
-  // onClickReaction(emoji: string) {
-  //   this.selectedEmoji = emoji;
-  //   this.addReaction();
-  // }
-
-  // addReaction() {
-  //   this.selectedCount++;
-  //   const covId = this.covoiturage.id; // Replace with the actual post ID
-  //   const reactionName = this.selectedEmojiToName(this.selectedEmoji);
-  //   this.http.post(`/api/posts/${covId}/reactions/${reactionName}`, {})
-  //     .subscribe((covoiturage: CovoiturageModule) => {
-  //       this.covoiturage = covoiturage;
-  //     });
-  // }
-
-  // selectedEmojiToName(emoji: string): string {
-  //   switch (emoji) {
-  //     case '😀':
-  //       return 'like';
-  //     case '😍':
-  //       return 'love';
-  //     case '👍':
-  //       return 'thumbs-up';
-  //     case '👎':
-  //       return 'thumbs-down';
-  //     case '🎉':
-  //       return 'celebration';
-  //     default:
-  //       throw new Error('Invalid emoji');
-  //   }
-  // }
 
 ///////////////covoiturage 
 
@@ -143,24 +128,33 @@ addcov(covoiturage:any): void {
   
   }
 getAllcov(){
-  this.covoiturageService.retrieveallCov().subscribe(res => {this.listPostsCov = res});
+  this.covoiturageService.retrieveallCov().subscribe(res => {this.listPostsCov = res;
+    for (let post of this.listPostsCov) {
+      this.covoiturageService.getCommentsByPostId(post.id).subscribe(comments => {
+        post.postComments = comments;
+      });
+    } });
 }
 
 /////////COMMENT 
 
 
-  onComment(PostComment:PostCommentModule) {
-    this.postCommentService.addPostComment(PostComment).subscribe(
-      () => {
-        PostComment.comment_text.push(PostComment);
-        //this.getAllcov();
-        
-      }
-    );
-    
-  }
+getComments(postId:any) {
+  this.covoiturageService.getCommentsByPostId(postId)
+    .subscribe(comments => this.listComments = comments);
+}
 
+addComment(postId:string,comment:any) {
+  
+    console.log(this.storageService.getUser().username) ;
 
+  comment.comment_author = this.storageService.getUser().username;
+ 
+  this.covoiturageService.addComment(parseInt(postId), comment).subscribe((comment) => {
+    this.listPostsCov.unshift(comment);
+  });
+  this.comment.comment_text = null;
+}
 
 
 

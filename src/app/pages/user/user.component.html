@@ -5,135 +5,103 @@
       <div class=" card">
         <div class=" card-header"><h5 class=" title">Edit Profile</h5></div>
         <div class=" card-body">
-          <form>
+          <form >
             <div class=" row">
-              <div class=" col-md-5 pr-md-1">
-                <div class=" form-group">
-                  <label> Company (disabled) </label>
-                  <input
-                    class=" form-control"
-                    disabled=""
-                    placeholder="Company"
-                    type="text"
-                    value="Creative Code Inc."
-                  />
+               
+                <div class=" col-md-3 px-md-1">
+                    <div class=" form-group">
+                        <label> nom </label>
+                        <input class=" form-control" placeholder="nom" type="text"
+                        [(ngModel)]="personne.nom"  name="nom"/>
+                    </div>
                 </div>
-              </div>
-              <div class=" col-md-3 px-md-1">
-                <div class=" form-group">
-                  <label> Username </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Username"
-                    type="text"
-                    value="michael23"
-                  />
+                <div class=" col-md-3 px-md-1">
+                    <div class=" form-group">
+                        <label> prenom </label>
+                        <input class=" form-control" placeholder="prenom" type="text"
+                        [(ngModel)]="personne.prenom"  />
+                    </div>
                 </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label for="exampleInputEmail1"> Email address </label>
-                  <input
-                    class=" form-control"
-                    placeholder="mike@email.com"
-                    type="email"
-                  />
+                <div class=" col-md-4 pl-md-1" >
+                    <div class=" form-group">
+                        <label> age </label>
+                        <input class=" form-control" placeholder="votre age" type="number" 
+                        [(ngModel)]="personne.age" />
+                    </div>
                 </div>
-              </div>
+                <div class=" col-md-4 pl-md-1" style="width: 10px">
+                    <div class=" form-group">
+                        <label > cin </label>
+                        <input class=" form-control" placeholder="votre cin" type="number"
+                        [(ngModel)]="personne.cin"  />
+                    </div>
+                </div>
+                <div class=" col-md-4 pl-md-1" style="width: 10px;">
+                    <div class=" form-group">
+                        <label > date de naissance </label>
+                        <input class=" form-control" placeholder="date de naissance" type="date" 
+                        [(ngModel)]="personne.dateNaissance" />
+                    </div>
+                </div>
             </div>
             <div class=" row">
-              <div class=" col-md-6 pr-md-1">
-                <div class=" form-group">
-                  <label> First Name </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Company"
-                    type="text"
-                    value="Mike"
-                  />
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Telephone personnel </label>
+                        <input class=" form-control" placeholder="Telephone personnel" type="text"
+                        [(ngModel)]="personne.telPersonnel"  />
+                    </div>
                 </div>
-              </div>
-              <div class=" col-md-6 pl-md-1">
-                <div class=" form-group">
-                  <label> Last Name </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Last Name"
-                    type="text"
-                    value="Andrew"
-                  />
+                <div class=" col-md-6 pl-md-1">
+                    <div class=" form-group">
+                        <label> Telephone Poste </label>
+                        <input class=" form-control" placeholder="Telephone Poste" type="text"
+                        [(ngModel)]="personne.telPoste" />
+                    </div>
                 </div>
-              </div>
             </div>
             <div class=" row">
-              <div class=" col-md-12">
-                <div class=" form-group">
-                  <label> Address </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Home Address"
-                    type="text"
-                    value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                  />
+                
+                <div class=" col-md-4 pr-md-1">
+                    <div class=" form-group">
+                        <label> Agence  </label>
+                        <input class=" form-control" placeholder="Votre Agence" type="text" 
+                        [(ngModel)]="personne.agence" />
+                    </div>
                 </div>
-              </div>
             </div>
             <div class=" row">
-              <div class=" col-md-4 pr-md-1">
-                <div class=" form-group">
-                  <label> City </label>
-                  <input
-                    class=" form-control"
-                    placeholder="City"
-                    type="text"
-                    value="Mike"
-                  />
+                
+                <div class=" col-md-4 pr-md-1"  style="width:150px ;padding-left: 10px; padding-right: 30px;">
+                    <label> Sexe  </label>
+                    <select name="dropdownOption" id="dropdownOption"
+                        class='form-control  dropdown-danger dropdown-menu-right '  [(ngModel)]="personne.sexe"  required
+                   
+                         name="Sexe">
+                        <option class="dropdown-item" value="homme">homme</option>
+                        <option class="dropdown-item" value="femme">femme</option>
+
+                    </select>
                 </div>
-              </div>
-              <div class=" col-md-4 px-md-1">
-                <div class=" form-group">
-                  <label> Country </label>
-                  <input
-                    class=" form-control"
-                    placeholder="Country"
-                    type="text"
-                    value="Andrew"
-                  />
-                </div>
-              </div>
-              <div class=" col-md-4 pl-md-1">
-                <div class=" form-group">
-                  <label> Postal Code </label>
-                  <input
-                    class=" form-control"
-                    placeholder="ZIP Code"
-                    type="number"
-                  />
-                </div>
-              </div>
+                
+                <!-- <div class=" col-md-4 pr-md-1"  style="width:150px;padding-left:10px; padding-right:30px;">
+                    <label> Role  </label>
+                    <select name="dropdownOption" id="dropdownOption"
+                        class='form-control  dropdown-danger dropdown-menu-right ' [(ngModel)]="personne.role"  required
+                   
+                         name="Role">
+                        <option class="dropdown-item" value="RH">RH</option>
+                        <option class="dropdown-item" value="personnel">personnel</option>
+
+                    </select>
+                </div>                                -->
             </div>
-            <div class=" row">
-              <div class=" col-md-8">
-                <div class=" form-group">
-                  <label> About Me </label>
-                  <textarea
-                    class=" form-control"
-                    cols="80"
-                    placeholder="Here can be your description"
-                    rows="4"
-                    value="Mike"
-                  >
-Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
-</textarea
-                  >
-                </div>
-              </div>
-            </div>
-          </form>
+           
+        </form>
         </div>
         <div class=" card-footer">
-          <button class=" btn btn-fill btn-danger" type="submit">Save</button>
-        </div>
+          <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;" class=" btn btn-fill btn-danger" type="submit" (click)="addPersonne(personne)">Save</button>
+      </div>
       </div>
     </div>
     <div class=" col-md-4">
@@ -145,21 +113,33 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
             <div class=" block block-two"></div>
             <div class=" block block-three"></div>
             <div class=" block block-four"></div>
-            <a href="javascript:void(0)">
-              <img alt="..." class=" avatar" src="assets/img/emilyz.jpg" />
-
-              <h5 class=" title">Mike Andrew</h5>
+            <!-- Add a file input field for selecting a profile picture -->
+            <!-- <input type="file" (change)="onFileSelected($event)">
+            <button (click)="uploadProfilePic()">Upload</button> -->
+            <a href="javascript:void(0)" >
+              <!-- <img alt="..." class=" avatar" [src]="personne.profilePic" /> -->
+              <!-- <a alt="..." class=" avatar" (click)="uploadProfilePic()"  >{{personne.profilePic}}</a> -->
+              <div >
+                <!-- <ng-container *ngIf="!personne.profilePicUrl">
+                  <img alt="Default Profile Picture" src="assets/img/profile.png" class="avatar" (click)="fileInput.click()" />
+                </ng-container> -->
+                <ng-container *ngIf="personne.profilePicUrl">
+                  <img  [src]="personne.profilePicUrl"  class="avatar"  />
+                </ng-container>
+                <input type="file" #fileInput style="display:none" (click)="onSubmit()" (change)="onFileSelected($event)"   >
+                
+              </div>
+              
+              <h5 class=" title">Oumayma sghari</h5>
             </a>
-            <p class=" description">Ceo/Co-Founder</p>
+            <p class=" description"></p>
           </div>
           <div class=" card-description">
-            Do not be scared of the truth because we need to restart the human
-            foundation in truth And I love you like Kanye loves Kanye I love
-            Rick Owens’ bed design but the back is...
+           
           </div>
         </div>
         <div class=" card-footer">
-          <div class=" button-container">
+          <!-- <div class=" button-container">
             <button
               class=" btn btn-icon btn-round btn-facebook"
               href="javascript:void(0)"
@@ -178,7 +158,7 @@ Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
             >
               <i class=" fab fa-google-plus"> </i>
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

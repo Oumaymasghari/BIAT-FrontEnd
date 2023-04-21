@@ -14,6 +14,5 @@ export class PostCommentModule {
     comment_text:any ;
     comment_author:any;
     comment_date:any ;
-    user:any;
-   
+    covoiturageId: number;
 }

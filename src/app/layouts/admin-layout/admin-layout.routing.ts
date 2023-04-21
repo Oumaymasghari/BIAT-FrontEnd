@@ -8,6 +8,9 @@ import { UserComponent } from "../../pages/user/user.component";
 import { TablesComponent } from "../../pages/tables/tables.component";
 import { TypographyComponent } from "../../pages/typography/typography.component";
 import { PostsComponent } from "src/app/pages/posts/posts.component";
+import { VenteachatComponent } from "src/app/pages/venteachat/venteachat.component";
+import { NouvelleventeComponent } from "src/app/pages/nouvellevente/nouvellevente.component";
+import { VenteComponent } from "src/app/pages/vente/vente.component";
 
 
 
@@ -21,6 +24,10 @@ export const AdminLayoutRoutes: Routes = [
   { path: "tables", component: TablesComponent },
   { path: "typography", component: TypographyComponent },
 
-  { path: "posts", component: PostsComponent }
+  { path: "posts", component: PostsComponent },
+  { path: "Venteachat", component: VenteachatComponent },
+  { path: "Vente", component: VenteComponent },
+  { path: "nouvellevente", component: NouvelleventeComponent }
+
   // { path: "rtl", component: RtlComponent }
 ];

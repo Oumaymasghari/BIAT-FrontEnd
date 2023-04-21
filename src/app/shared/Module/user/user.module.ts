@@ -15,5 +15,5 @@ export class UserModule {
   username:any;
   email:any;
   password:any;
- 
+ role:any;
 }

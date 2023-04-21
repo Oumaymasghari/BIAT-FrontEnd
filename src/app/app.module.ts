@@ -15,6 +15,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { ComponentsModule } from "./components/components.module";
 import { PostsComponent } from "./pages/posts/posts.component";
 import { TokenInterceptorService } from "./shared/Services/tokenInterceptor/token-interceptor.service";
+import { VenteachatComponent } from './pages/venteachat/venteachat.component';
+import { NouvelleventeComponent } from './pages/nouvellevente/nouvellevente.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { VenteComponent } from './pages/vente/vente.component';
 
 
 @NgModule({
@@ -26,9 +30,10 @@ import { TokenInterceptorService } from "./shared/Services/tokenInterceptor/toke
     NgbModule,
     RouterModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, PostsComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, PostsComponent, VenteachatComponent, NouvelleventeComponent, VenteComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
