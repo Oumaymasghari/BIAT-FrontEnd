@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
 import { Observable } from 'rxjs';
+import { VenteachatModule } from '../../Module/venteachat/venteachat.module';
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,25 @@ import { Observable } from 'rxjs';
 export class VenteachatService {
   readonly API_URL = 'http://localhost:8089/Vente';
   constructor(private httpClient: HttpClient,private userservice: UserService) { }
-  addvente(formData: FormData) {
+  // addvente(formData: FormData) {
     
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.userservice.getToken()}`,
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${this.userservice.getToken()}`,
       
-    });
-    console.log(formData.get('file'))
-    return this.httpClient.post(`${this.API_URL}/addVente`, formData, { headers });
+  //   });
+  //   console.log(formData.get('file'))
+  //   return this.httpClient.post(`${this.API_URL}/addVente`, formData, { headers });
+  // }
+  addVente(file: File, vente: VenteachatModule): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    formData.append('article', vente.article);
+   // formData.append('dateDisponibilite', vente.dateDisponibilite.toString());
+    formData.append('prix', vente.prix.toString());
+    formData.append('contactNumber', vente.contactNumber.toString());
+    formData.append('place', vente.place);
+    formData.append('typeVente', vente.typeVente.toString());
+    return this.httpClient.post<VenteachatModule>(`${this.API_URL}/addVente`, formData);
   }
   getAllvente() {
     return this.httpClient.get(`${this.API_URL}/getAllVentes`)

@@ -1,7 +1,92 @@
 <div class=" content">
     <div class=" row">
         <div class=" col-md-12">
-            test 
+            <form >
+                <!-- <input type="hidden" name="userId" value="{{ currentUser.id }}"> -->
+                <div class="create-post-container">
+                    <!-- <img class="profile-pic" src="{{currentUser.profilePic}}" alt="Profile Picture"> -->
+                    <h3 class="create-post-user">{{currentUser.username}}</h3>
+                </div>
+                <div class=" row">
+
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> article </label>
+                            <input class=" form-control" placeholder="description article" type="text"
+                            [(ngModel)]="vente.article" />
+                        </div>
+                    </div>
+                    <!-- <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> Date disponobilite </label>
+                            <input class=" form-control" placeholder=" Date disponobilite" type="date"
+                            [(ngModel)]="vente.dateDisponibilite"   />
+                        </div>
+                    </div> -->
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> prix </label>
+                            <input class=" form-control" placeholder="prix" [(ngModel)]="vente.prix"    name="prix"
+                                type="number" />
+                        </div>
+                    </div>
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> numero a contacter </label>
+                            <input class=" form-control" placeholder=" numero a contacter" [(ngModel)]="vente.contactNumber"    name="contactNumber"
+                                type="number" />
+                        </div>
+                    </div>
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> positon </label>
+                            <input class=" form-control" placeholder=" où elle est situee  " type="text"
+                            [(ngModel)]="vente.place"    />
+                        </div>
+                    </div>
+
+                    <div class=" col-md-4 pr-md-1" style="width:150px ;padding-left: 10px; padding-right: 30px;">
+                        <label> type article a vendre </label>
+                        <select name="dropdownOption" id="dropdownOption"
+                            class='form-control  dropdown-danger dropdown-menu-right '
+                            [(ngModel)]="vente.typeVente"   required name="typeVente">
+                            <option class="dropdown-item" value="voiture">voiture</option>
+                            <option class="dropdown-item" value="immobilier">immobilier</option>
+                            <option class="dropdown-item" value="terrain">terrain</option>
+                            <option class="dropdown-item" value="autres">autres</option>
+
+                        </select>
+                    </div>
+                  
+                 
+
+                    <input type="file" name="file" (change)="selectFile($event)">
+               
+                </div>
+
+                <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
+                    margin-left: 10px;" type="submit" (click)="upload(vente)" >Post</button>
+            </form>
+            <div *ngFor="let vente of acceptedVentes">
+                <div class=" card post">
+
+                    <div class="post-header">
+                       
+                        <!-- <h3>{{ vente.user.username }}</h3> -->
+                        <!-- <p>{{ covoiturage.datePost | date: 'medium' }}</p> -->
+                    </div>
+                    <div class="post-content">
+                        <p>bonjour ,
+                            <br> je vous propose un {{ vente.article }} a vendre   a  
+                            {{ vente.prix}} DT en {{ vente.place }} </p>
+                    </div>
+                    <div class="post-pictures">
+                        <div *ngFor="let picture of vente.pictures">
+                          <img [src]="'data:image/jpeg;base64,' + picture.data" height="100" width="100"  class="img-fluid">
+                        </div>
+                      </div>
+                </div>
+            </div>
         </div>
     </div>
 

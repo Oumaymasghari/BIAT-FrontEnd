@@ -32,18 +32,18 @@ export class VenteachatComponent implements OnInit {
   this.getvente();
   }
 
-  addvente(formData:FormData) {
-    console.log(this.form.value);
+  // addvente(formData:FormData) {
+  //   console.log(this.form.value);
   
-   formData = new FormData();
+  //  formData = new FormData();
    
-    for (let i = 0; i < this.selectedFiles.length; i++) {
-      formData.append('file', this.selectedFiles[i]);
-      }
+  //   for (let i = 0; i < this.selectedFiles.length; i++) {
+  //     formData.append('file', this.selectedFiles[i]);
+  //     }
    
-    console.log(this.formData);
-    this.venteachatservice.addvente(formData).subscribe();
-  }
+  //   console.log(this.formData);
+  //   this.venteachatservice.addvente(formData).subscribe();
+  // }
   onFileSelected(event: any) {
     this.selectedFiles = event.target.files;
   }
