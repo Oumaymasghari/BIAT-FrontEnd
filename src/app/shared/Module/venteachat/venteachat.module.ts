@@ -13,7 +13,7 @@ import { TypeventeModule } from '../typevente/typevente.module';
 export class VenteachatModule {
   id:any;
   article:any ;
-  dateDisponibilite:Date ;
+ 
   prix:any ;
   place:any ;
   contactNumber:any;

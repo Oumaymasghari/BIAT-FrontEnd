@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
-import { switchMap } from "rxjs";
+import { map, switchMap } from "rxjs";
 import { PersonneModule } from "src/app/shared/Module/personne/personne.module";
 import { UserModule } from "src/app/shared/Module/user/user.module";
 import { PersonneServiceService } from "src/app/shared/Services/PersonneService/personne-service.service";
@@ -13,14 +13,17 @@ import { StorageService } from "src/app/shared/Services/storage/storage.service"
 })
 export class UserComponent implements OnInit {
   constructor(private personneServiceService:PersonneServiceService,private storageService: StorageService) {}
-  personne:PersonneModule ;
+  personne:any ;
   selectedFile: File ;
   currentUser: any;
    user:UserModule;
    listPersonne:any;
+   person: boolean = false;
   ngOnInit() {
+    this.submit();
+    this.getpersonnebyid()
     this.currentUser = this.storageService.getUser()
-
+this.getpersonnebyid();
     this.personne = {
       id: null,
       nom: null,
@@ -39,19 +42,19 @@ export class UserComponent implements OnInit {
      
    }
   
-   this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id).subscribe(
-    (per) => {
-      console.log("per : "+per);
-      return this.personneServiceService.getProfilePicUrl( per).subscribe(
-        (data) => {
-          console.log(data)
-          this.personne.profilePicUrl = data;
+  //  this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id).subscribe(
+  //   (per) => {
+  //     console.log("per : "+per);
+  //     return this.personneServiceService.getProfilePicUrl( per).subscribe(
+  //       (data) => {
+  //         console.log(data)
+  //         this.personne.profilePicUrl = data;
           
-        }
-      );
-     // return this.personneServiceService.uploadProfilePic(formData, per);
+  //       }
+  //     );
+  //    // return this.personneServiceService.uploadProfilePic(formData, per);
       
-    })
+  //   })
   
    
   }
@@ -114,12 +117,61 @@ this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id
   }
 
 
-  addPersonne(per: any){
- 
-    this.personneServiceService.addPersonne(per,this.storageService.getUser().id).subscribe();
+  addPersonne(per: PersonneModule){
+
+        // this.personneServiceService.addPersonne(per,this.storageService.getUser().id).subscribe();
+        const userId = this.storageService.getUser().id;
+        this.personneServiceService.getPERSONNEById(userId).subscribe((personne: PersonneModule) => {
+          if (personne) {
+            // If a personne already exists for this user, update their information
+            per.id = personne.id;
+            this.getpersonnebyid();
+          } else {
+            // If no personne exists for this user, add a new one
+            this.personneServiceService.addPersonne(per, userId).subscribe();
+            this.personne = per; // Update the current personne to show their information
+          }
+        });
+    
   }
-  getAllcov(){
+  getAllpersonne(){
     this.personneServiceService.retrieveallPersonne().subscribe(res => {this.listPersonne = res;
        });
+  }
+
+  getpersonnebyid(){
+    console.log("this.storageService.getUser().id" +this.storageService.getUser().id)
+    this.personneServiceService.getPERSONNEById(this.storageService.getUser().id).subscribe();
+  }
+
+  // submitForm() {
+  //   this.personneServiceService.getPERSONNEById(this.storageService.getUser().id).subscribe(() => {
+  //     if(this.storageService.getUser().id!=null){// If userid exists, show the person information
+  //     this.person = true;
+  //     this.getpersonnebyid();
+  //     console.log(this.getpersonnebyid())
+  //     }
+  //     else{
+  //       this.person = false;
+  //     }
+  //   }
+  //   )
+  
+  // }
+  submit(){
+    this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id).pipe(
+      switchMap((per) => {
+        return  this.personneServiceService.getPERSONNEById(per)  
+      })
+    ).subscribe((personne) => {
+          if(this.storageService.getUser().id != null){// If userid exists, show the person information
+          this.person = true;
+          this.personne = personne;
+          console.log(" this.getpersonnebyid() "+this.getpersonnebyid())
+          }
+          else{
+            this.person = false;
+          }
+        });
   }
 }

@@ -60,9 +60,9 @@
                   
                  
 
-                    <input type="file" name="file" (change)="selectFile($event)">
-               
+                    <input style="padding-top: 35px; margin-left: 20px;  " type="file" name="file" (change)="selectFile($event)">
                 </div>
+              
 
                 <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
                     margin-left: 10px;" type="submit" (click)="upload(vente)" >Post</button>
@@ -72,7 +72,7 @@
 
                     <div class="post-header">
                        
-                        <!-- <h3>{{ vente.user.username }}</h3> -->
+                        <h3>{{ vente.user.username }}</h3>
                         <!-- <p>{{ covoiturage.datePost | date: 'medium' }}</p> -->
                     </div>
                     <div class="post-content">
@@ -85,6 +85,49 @@
                           <img [src]="'data:image/jpeg;base64,' + picture.data" height="100" width="100"  class="img-fluid">
                         </div>
                       </div>
+                      <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;width: 140px;left: 900px;" class=" btn btn-fill btn-danger" type="submit"  (click)="openModal()">acheter</button>
+                         <!-- Modal -->
+          <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal}" style="display: block;">
+
+            <div class="modal modal-content">
+
+              <div class="modal-body">
+                <form >
+                  <h2>simulation pour la possibilite de prendre un credit de {{vente.prix}} dt</h2>
+                  <div >
+                    <span>salaire mensuel</span>
+                    <input type="number" [(ngModel)]="creditRequest.salaireMensuel">
+                    
+                  
+                  </div>
+                  
+                  <div class=" row">
+                    <div>
+                      <span>autres mensualites de credits</span>
+                      <input type="number"  [(ngModel)]="creditRequest.mensualitesCredit">
+                      
+                    </div>
+
+                  </div>
+
+                  <div class="modal-footer" style="padding-top: 40px;">
+                    <button class="bt1" (click)="closeModal()">fermer</button>
+                    <button class="bt2" (click)="calculate(vente.id)">calculer possibilite de salaire</button>
+                  
+                  <p>{{resultatC}} </p>
+                  <button class="bt1" (click)="closeModal()">fermer</button>
+                  <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                    Signup failed!<br />{{ errorMessage }}
+                  </div> -->
+                </div>
+                </form>
+                
+                
+              </div>
+              
+            </div>
+            
+          </div>
                 </div>
             </div>
         </div>

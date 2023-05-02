@@ -10,7 +10,7 @@ import { VenteachatService } from 'src/app/shared/Services/venteachat/venteachat
 export class NouvelleventeComponent implements OnInit {
 
   listVente :any;
-  vente:VenteachatModule;
+  vente:VenteachatModule[] = [];
   constructor(private  venteachatService : VenteachatService){}
   ngOnInit(): void {
     this.getAllventes();
@@ -23,7 +23,8 @@ getAllventes(){
 }
 acceptVente(id:any) {
   this.venteachatService.acceptVente(id).subscribe(() => {
- 
+    this.vente = this.vente.filter(vente => vente.id !== id);
+    this.venteachatService.deleteAcceptedVentes().subscribe();
   });
 }
 }

@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserService } from '../user/user.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { VenteachatModule } from '../../Module/venteachat/venteachat.module';
+import { CreditRequest } from '../../request/CreditRequest.module';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,20 @@ export class VenteachatService {
   }
   getAcceptedVentes(): Observable<any[]> {
     return this.httpClient.get<any[]>(`${this.API_URL}/ventes/accepted`);
+  }
+  deleteAcceptedVentes() {
+    return this.httpClient.delete<any[]>(`${this.API_URL}/ventes/delete`);
+  }
+
+  calculerCapaciteCredit(request: CreditRequest, idvente: number):any  {
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     // Authorization: `Bearer ${this.userservice.getToken()}`,
+    //     // 'Content-Type': 'application/json',
+    //     responseType: 'text'
+    //   }),
+    // };
+    const url = `${this.API_URL}/credit/${idvente}`;
+    return this.httpClient.post(url, request,{responseType: 'text'})
   }
 }

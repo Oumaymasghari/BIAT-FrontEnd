@@ -34,4 +34,9 @@ getProfilePicUrl(userid: any): Observable<any> {
  
   return this.httpClient.get(`${this.API_URL}/getProfilePicUrl/${userid}`, { responseType: 'blob' });
 }
+getPERSONNEById(id: any) {
+    
+  return this.httpClient.get(`${this.API_URL}/retrieve-personne/${id}`);
+}
+
 }

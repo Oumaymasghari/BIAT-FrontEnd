@@ -11,9 +11,9 @@
             <table class=" table tablesorter" id="">
               <thead class=" text-primary">
                 <tr>
-                  <th>id</th>
+               
                   <th>article</th>
-                  <th>date disponibilite</th>
+                  
                   <th>prix </th>
                   <th>place</th>
                   <th>type vente</th>
@@ -24,13 +24,15 @@
               </thead>
               <tbody>
                 <tr *ngFor='let v of listVente' >
-                  <td style="color: brown;">{{v.id}}</td>
+                  
                   <td>{{v.article}}</td>
-                  <td>{{v.dateDisponibilite}}</td>
+                 
                   <td>{{v.prix}}</td>
                   <td>{{v.place}}</td>
                   <td>{{v.typeVente}}</td>
-                  <td>{{v.pictures}}</td>
+                  <td><ng-container *ngFor="let picture of v.pictures">
+                    <img [src]="'data:image/jpeg;base64,' + picture.data" alt="Picture" style="max-width: 100px;">
+                  </ng-container></td>
                   <td>
                     <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;" class=" btn btn-fill btn-danger" type="submit" (click)="acceptVente(v.id)" >accepter</button>
                     <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;" class=" btn btn-fill btn-danger" type="submit" >refuser</button>
