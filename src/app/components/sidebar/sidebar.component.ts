@@ -41,18 +41,32 @@ export const ROUTES: RouteInfo[] = [
     icon: "icon-bus-front-12",
     class: ""
   },
+  // {
+  //   path: "/Venteachat",
+  //   title: "Vente et Achat",
+  //   rtlTitle: "لوحة القيادة",
+  //   icon: "tim-icons icon-cart",
+  //   class: ""
+  // },
   {
-    path: "/Venteachat",
-    title: "Vente et Achat",
+    path: "/Vente",
+    title: "Vente et Achat ",
     rtlTitle: "لوحة القيادة",
     icon: "tim-icons icon-cart",
     class: ""
   },
   {
-    path: "/Vente",
-    title: "Vente et Achat jdid",
+    path: "/amicale",
+    title: "Activite Amicale",
     rtlTitle: "لوحة القيادة",
-    icon: "tim-icons icon-cart",
+    icon: "tim-icons icon-square-pin",
+    class: ""
+  },
+  {
+    path: "/bonPlan",
+    title: "Bon Plans",
+    rtlTitle: "لوحة القيادة",
+    icon: "tim-icons icon-heart-2",
     class: ""
   },
   {

@@ -104,7 +104,7 @@
             <h4>{{personne.nom}} {{personne.prenom}}</h4>
             <p>Age: {{personne.age}}</p>
             <p>CIN: {{personne.cin}}</p>
-            <p>Date de naissance: {{personne.dateNaissance}}</p>
+            <p>Date de naissance: {{personne.dateNaissance | date:'dd/MM/yyyy'}}</p>
             <p>Téléphone personnel: {{personne.telPersonnel}}</p>
             <p>Téléphone Poste: {{personne.telPoste}}</p>
             <p>Agence: {{personne.agence}}</p>
@@ -130,18 +130,18 @@
               <!-- <img alt="..." class=" avatar" [src]="personne.profilePic" /> -->
               <!-- <a alt="..." class=" avatar" (click)="uploadProfilePic()"  >{{personne.profilePic}}</a> -->
               <div>
-                <!-- <ng-container *ngIf="!personne.profilePicUrl">
+                <ng-container *ngIf="!personne.profilePicUrl">
                   <img alt="Default Profile Picture" src="assets/img/profile.png" class="avatar" (click)="fileInput.click()" />
-                </ng-container> -->
+                </ng-container>
                 <ng-container *ngIf="personne.profilePicUrl">
-                  <img [src]="'data:image/jpeg;base64,' + personne.profilePicUrl.data" class="avatar" />
+                  <img [src]="picture" class="avatar" />
                 </ng-container>
                 <input type="file" #fileInput style="display:none" (click)="onSubmit()"
                   (change)="onFileSelected($event)">
 
               </div>
 
-              <h5 class=" title">Oumayma sghari</h5>
+              <h5 class=" title">{{personne.nom}} {{personne.prenom}}</h5>
             </a>
             <p class=" description"></p>
           </div>

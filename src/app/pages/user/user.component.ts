@@ -5,24 +5,26 @@ import { PersonneModule } from "src/app/shared/Module/personne/personne.module";
 import { UserModule } from "src/app/shared/Module/user/user.module";
 import { PersonneServiceService } from "src/app/shared/Services/PersonneService/personne-service.service";
 import { StorageService } from "src/app/shared/Services/storage/storage.service";
-
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: "app-user",
   templateUrl: "user.component.html",
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  constructor(private personneServiceService:PersonneServiceService,private storageService: StorageService) {}
+  constructor(private personneServiceService:PersonneServiceService,private storageService: StorageService,
+    private sanitizer: DomSanitizer) {}
   personne:any ;
   selectedFile: File ;
   currentUser: any;
    user:UserModule;
    listPersonne:any;
    person: boolean = false;
+   picture:any
   ngOnInit() {
     this.submit();
     this.getpersonnebyid()
-    this.currentUser = this.storageService.getUser()
+  
 this.getpersonnebyid();
     this.personne = {
       id: null,
@@ -42,20 +44,18 @@ this.getpersonnebyid();
      
    }
   
-  //  this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id).subscribe(
-  //   (per) => {
-  //     console.log("per : "+per);
-  //     return this.personneServiceService.getProfilePicUrl( per).subscribe(
-  //       (data) => {
-  //         console.log(data)
-  //         this.personne.profilePicUrl = data;
-          
-  //       }
-  //     );
-  //    // return this.personneServiceService.uploadProfilePic(formData, per);
-      
-  //   })
-  
+   this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id).subscribe(
+    (per) => {
+        return this.personneServiceService.getProfilePicUrl(per).subscribe(
+            (data) => {
+              const jsonData = JSON.parse(data);
+              this.picture = this.sanitizer.bypassSecurityTrustUrl(jsonData.data);
+              console.log(jsonData);
+              
+            }
+        );
+    }
+);
    
   }
 
@@ -173,5 +173,13 @@ this.personneServiceService.getPersonneByUserId(this.storageService.getUser().id
             this.person = false;
           }
         });
+  }
+  toBase64(buffer: ArrayBuffer): string {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return btoa(binary);
   }
 }

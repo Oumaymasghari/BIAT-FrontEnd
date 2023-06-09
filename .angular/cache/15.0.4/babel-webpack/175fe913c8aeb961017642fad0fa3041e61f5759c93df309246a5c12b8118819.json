@@ -1,1 +1,0 @@
-{"ast":null,"code":"export var ERoleModule = /*#__PURE__*/(() => {\n  (function (ERoleModule) {\n    ERoleModule[ERoleModule[\"ROLE_PERSONNEL\"] = 0] = \"ROLE_PERSONNEL\";\n    ERoleModule[ERoleModule[\"ROLE_RH\"] = 1] = \"ROLE_RH\";\n  })(ERoleModule || (ERoleModule = {}));\n  return ERoleModule;\n})();","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

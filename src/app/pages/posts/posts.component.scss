@@ -65,77 +65,79 @@ h2{
   }
   
   .post-comments {
-    margin: 10px 0;
+    margin-top: 20px;
   }
-  .comment p{
-    font-size: 14px;
-    color: #999;
-    padding-top: 10px;
-    padding-left: 700px;
-  }
-  .comment h5{
-    font-size: 14px;
-    color: #999;
-    padding-top: -10px;
-    padding-left: 70px;
-  }
+  
   .comment {
     display: flex;
-    align-items: center;
-    margin: 10px 0;
-    border-bottom: 1px solid #ccc;
-  margin-bottom: 10px;
- 
+    align-items: flex-start;
+    margin-bottom: 20px;
   }
   
   .comment img.profile-pic {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
+    object-fit: cover;
     margin-right: 10px;
   }
   
-  .comment h4 {
-    margin: 0;
-    font-size: medium;
+  .comment-content {
+    flex-grow: 1;
   }
   
-  .comment p {
+  .comment-content h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .comment-content p {
     margin: 5px 0;
-    color: #999;
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .comment-content h5 {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .comment-separator hr {
+    margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+  }
+  
+  .post-add-comment {
+    margin-top: 20px;
   }
   
   .post-add-comment form {
     display: flex;
     align-items: center;
-    margin-top: 10px;
   }
   
   .post-add-comment input {
-    flex: 1;
+    flex-grow: 1;
+    padding: 10px;
     border: 1px solid #ccc;
-  //  border-bottom: 1px solid #ccc;
-   // border-top: 1px solid #ccc;
-    padding: 5px;
-  }
-  .ta {
-    flex: 1;
-   // border: 1px solid #ccc;
-    border-radius: 10px;
-    width: 400px;
-    padding: 5px;
-    background-color:rgb(255, 247, 234);
+    border-radius: 4px;
+    margin-right: 10px;
   }
   
   .post-add-comment button {
-    background: none;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    color: #ffffff;
-    margin-left: 10px;
   }
-
+  
+  .post-add-comment button:hover {
+    background-color: #0056b3;
+  }
 
 //   create post 
 

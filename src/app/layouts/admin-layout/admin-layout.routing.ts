@@ -11,6 +11,8 @@ import { PostsComponent } from "src/app/pages/posts/posts.component";
 import { VenteachatComponent } from "src/app/pages/venteachat/venteachat.component";
 import { NouvelleventeComponent } from "src/app/pages/nouvellevente/nouvellevente.component";
 import { VenteComponent } from "src/app/pages/vente/vente.component";
+import { AmicaleComponent } from "src/app/pages/amicale/amicale.component";
+import { BonPlanComponent } from "src/app/pages/bon-plan/bon-plan.component";
 
 
 
@@ -27,7 +29,10 @@ export const AdminLayoutRoutes: Routes = [
   { path: "posts", component: PostsComponent },
   { path: "Venteachat", component: VenteachatComponent },
   { path: "Vente", component: VenteComponent },
-  { path: "nouvellevente", component: NouvelleventeComponent }
+  { path: "nouvellevente", component: NouvelleventeComponent },
+  { path: "amicale", component: AmicaleComponent },
+  { path: "bonPlan", component: BonPlanComponent }
+
 
   // { path: "rtl", component: RtlComponent }
 ];

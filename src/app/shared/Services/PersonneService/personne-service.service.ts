@@ -32,7 +32,7 @@ getPersonneByUserId(userid: any): Observable<any> {
 }
 getProfilePicUrl(userid: any): Observable<any> {
  
-  return this.httpClient.get(`${this.API_URL}/getProfilePicUrl/${userid}`, { responseType: 'blob' });
+  return this.httpClient.get(`${this.API_URL}/getProfilePicUrl/${userid}`, { responseType: 'text' });
 }
 getPERSONNEById(id: any) {
     

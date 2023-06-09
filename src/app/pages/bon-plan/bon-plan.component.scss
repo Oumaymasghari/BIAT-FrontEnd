@@ -1,0 +1,5 @@
+#numerotation:before {
+    counter-increment: case;
+    content: counter(case);
+    }
+    

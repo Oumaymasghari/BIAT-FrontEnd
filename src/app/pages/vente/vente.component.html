@@ -1,7 +1,7 @@
 <div class=" content">
     <div class=" row">
         <div class=" col-md-12">
-            <form >
+            <form>
                 <!-- <input type="hidden" name="userId" value="{{ currentUser.id }}"> -->
                 <div class="create-post-container">
                     <!-- <img class="profile-pic" src="{{currentUser.profilePic}}" alt="Profile Picture"> -->
@@ -13,7 +13,7 @@
                         <div class=" form-group">
                             <label> article </label>
                             <input class=" form-control" placeholder="description article" type="text"
-                            [(ngModel)]="vente.article" />
+                                [(ngModel)]="vente.article" />
                         </div>
                     </div>
                     <!-- <div class=" col-md-3 px-md-1">
@@ -26,30 +26,30 @@
                     <div class=" col-md-3 px-md-1">
                         <div class=" form-group">
                             <label> prix </label>
-                            <input class=" form-control" placeholder="prix" [(ngModel)]="vente.prix"    name="prix"
+                            <input class=" form-control" placeholder="prix" [(ngModel)]="vente.prix" name="prix"
                                 type="number" />
                         </div>
                     </div>
                     <div class=" col-md-3 px-md-1">
                         <div class=" form-group">
                             <label> numero a contacter </label>
-                            <input class=" form-control" placeholder=" numero a contacter" [(ngModel)]="vente.contactNumber"    name="contactNumber"
-                                type="number" />
+                            <input class=" form-control" placeholder=" numero a contacter"
+                                [(ngModel)]="vente.contactNumber" name="contactNumber" type="number" />
                         </div>
                     </div>
                     <div class=" col-md-3 px-md-1">
                         <div class=" form-group">
                             <label> positon </label>
                             <input class=" form-control" placeholder=" où elle est situee  " type="text"
-                            [(ngModel)]="vente.place"    />
+                                [(ngModel)]="vente.place" />
                         </div>
                     </div>
 
                     <div class=" col-md-4 pr-md-1" style="width:150px ;padding-left: 10px; padding-right: 30px;">
                         <label> type article a vendre </label>
                         <select name="dropdownOption" id="dropdownOption"
-                            class='form-control  dropdown-danger dropdown-menu-right '
-                            [(ngModel)]="vente.typeVente"   required name="typeVente">
+                            class='form-control  dropdown-danger dropdown-menu-right ' [(ngModel)]="vente.typeVente"
+                            required name="typeVente">
                             <option class="dropdown-item" value="voiture">voiture</option>
                             <option class="dropdown-item" value="immobilier">immobilier</option>
                             <option class="dropdown-item" value="terrain">terrain</option>
@@ -57,77 +57,84 @@
 
                         </select>
                     </div>
-                  
-                 
 
-                    <input style="padding-top: 35px; margin-left: 20px;  " type="file" name="file" (change)="selectFile($event)">
+
+
+                    <input style="padding-top: 35px; margin-left: 20px;  " type="file" name="file"
+                        (change)="selectFile($event)">
                 </div>
-              
+
 
                 <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
-                    margin-left: 10px;" type="submit" (click)="upload(vente)" >Post</button>
+                    margin-left: 10px;" type="submit" (click)="upload(vente)">Post</button>
             </form>
             <div *ngFor="let vente of acceptedVentes">
                 <div class=" card post">
 
                     <div class="post-header">
-                       
+
                         <h3>{{ vente.user.username }}</h3>
                         <!-- <p>{{ covoiturage.datePost | date: 'medium' }}</p> -->
                     </div>
                     <div class="post-content">
                         <p>bonjour ,
-                            <br> je vous propose un {{ vente.article }} a vendre   a  
-                            {{ vente.prix}} DT en {{ vente.place }} </p>
+                            <br> je vous propose un {{ vente.article }} a vendre a
+                            {{ vente.prix}} DT en {{ vente.place }}
+                        </p>
                     </div>
                     <div class="post-pictures">
                         <div *ngFor="let picture of vente.pictures">
-                          <img [src]="'data:image/jpeg;base64,' + picture.data" height="100" width="100"  class="img-fluid">
+                            <img [src]="'data:image/jpeg;base64,' + picture.data" height="100" width="100"
+                            height="100" width="150" class="img-fluid">
                         </div>
-                      </div>
-                      <button style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;width: 140px;left: 900px;" class=" btn btn-fill btn-danger" type="submit"  (click)="openModal()">acheter</button>
-                         <!-- Modal -->
-          <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal}" style="display: block;">
-
-            <div class="modal modal-content">
-
-              <div class="modal-body">
-                <form >
-                  <h2>simulation pour la possibilite de prendre un credit de {{vente.prix}} dt</h2>
-                  <div >
-                    <span>salaire mensuel</span>
-                    <input type="number" [(ngModel)]="creditRequest.salaireMensuel">
-                    
-                  
-                  </div>
-                  
-                  <div class=" row">
-                    <div>
-                      <span>autres mensualites de credits</span>
-                      <input type="number"  [(ngModel)]="creditRequest.mensualitesCredit">
-                      
                     </div>
+                    <button
+                        style="background:linear-gradient(rgb(250, 107, 25), rgb(233, 98, 30)) ;width: 140px;left: 900px;"
+                        class=" btn btn-fill btn-danger" type="submit" (click)="openModal()">acheter</button>
+                    <!-- Modal -->
+                    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': showModal}"
+                        style="display: block;">
 
-                  </div>
+                        <div class="modal modal-content">
 
-                  <div class="modal-footer" style="padding-top: 40px;">
-                    <button class="bt1" (click)="closeModal()">fermer</button>
-                    <button class="bt2" (click)="calculate(vente.id)">calculer possibilite de salaire</button>
-                  
-                  <p>{{resultatC}} </p>
-                  <button class="bt1" (click)="closeModal()">fermer</button>
-                  <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                            <div class="modal-body">
+                                <form>
+                                    <h2>simulation pour la possibilite de prendre un credit de {{vente.prix}} dt {{vente.id}} </h2>
+                                    <div>
+                                        <span>salaire mensuel</span>
+                                        <input type="number" [(ngModel)]="creditRequest.salaireMensuel">
+
+
+                                    </div>
+
+                                    <div class=" row">
+                                        <div>
+                                            <span>autres mensualites de credits</span>
+                                            <input type="number" [(ngModel)]="creditRequest.mensualitesCredit">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="modal-footer" style="padding-top: 40px;">
+                                        <button class="bt1" (click)="closeModal()">fermer</button>
+                                        <button class="bt2" (click)="calculate(vente.id)">calculer possibilite de
+                                            salaire</button>
+
+                                        <p>{{resultatC}} </p>
+                                        <button class="bt1" (click)="closeModal()">fermer</button>
+                                        <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
                     Signup failed!<br />{{ errorMessage }}
                   </div> -->
-                </div>
-                </form>
-                
-                
-              </div>
-              
-            </div>
-            
-          </div>
+                                    </div>
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ import { PostCommentService } from 'src/app/shared/Services/postComment/post-com
 import { StorageService } from 'src/app/shared/Services/storage/storage.service';
 import { UserService } from 'src/app/shared/Services/user/user.service';
 
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
@@ -25,12 +26,13 @@ export class PostsComponent implements OnInit {
   selectedCount: number;
   listComments:any;
   covoiturageForm: FormGroup;
+  commentText: string[] = [];
   newComment: PostCommentModule = new PostCommentModule();
   comment: PostCommentModule;
  
   constructor(private covoiturageService: CovoiturageService, private storageService: StorageService,
               private userservice:UserService,private http: HttpClient, private postCommentService:PostCommentService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,private snackBar: MatSnackBar) { }
   ngOnInit(): void {
     this.currentUser = this.storageService.getUser();
   this.getAllcov();
@@ -112,21 +114,42 @@ addReaction(id:any,reaction: any): void  {
 isAuthenticated(): boolean {
   return this.userservice.isAuthenticated();
 }
-addcov(covoiturage:any): void {
-  console.log(JSON.stringify(this.covoiturage.id));
-  console.log("user " + JSON.stringify(this.storageService.getUser()));
+// addcov(covoiturage:any): void {
+//   console.log(JSON.stringify(this.covoiturage.id));
+//   console.log("user " + JSON.stringify(this.storageService.getUser()));
+//   this.covoiturageService.addCovoiturage(covoiturage).subscribe(
+//     () => {
+//       this.listPostsCov.unshift(covoiturage);
+//       //this.getAllcov();
+      
+//     }
+//   );
+//   const currentUser = this.userservice.getCurrentUser();
+//   this.covoiturageForm.value.user = currentUser.id;
+  
+  
+//   }
+addcov(covoiturage: any): void {
+  // ... your existing code ...
+
   this.covoiturageService.addCovoiturage(covoiturage).subscribe(
     () => {
       this.listPostsCov.unshift(covoiturage);
-      //this.getAllcov();
-      
+      this.snackBar.open('Covoiturage added successfully', 'Close', {
+        duration: 2000, // Set the duration of the snackbar
+      });
+    },
+    (error) => {
+      console.error(error);
+      this.snackBar.open('Failed to add covoiturage', 'Close', {
+        duration: 2000, // Set the duration of the snackbar
+      });
     }
   );
-  const currentUser = this.userservice.getCurrentUser();
-  this.covoiturageForm.value.user = currentUser.id;
-  
-  
-  }
+
+  // ... remaining code ...
+}
+
 getAllcov(){
   this.covoiturageService.retrieveallCov().subscribe(res => {this.listPostsCov = res;
     for (let post of this.listPostsCov) {
@@ -144,16 +167,34 @@ getComments(postId:any) {
     .subscribe(comments => this.listComments = comments);
 }
 
-addComment(postId:string,comment:any) {
-  
-    console.log(this.storageService.getUser().username) ;
+// addComment(postId: string, comment: any) {
+//   comment.comment_author = this.storageService.getUser().username;
 
-  comment.comment_author = this.storageService.getUser().username;
- 
+//   this.covoiturageService.addComment(parseInt(postId), comment).subscribe((comment) => {
+//     // Update the existing list of comments
+//     this.listComments.unshift(comment);
+//   });
+
+//   // Reset the comment input field
+//   this.comment.comment_text = null;
+// }
+newCommentText: { [postId: number]: string } = {};
+addComment(postId: string, commentText: string) {
+  const comment: any = {
+    comment_author: this.storageService.getUser().username,
+    comment_text: commentText
+  };
+
   this.covoiturageService.addComment(parseInt(postId), comment).subscribe((comment) => {
-    this.listPostsCov.unshift(comment);
+    // Update the existing list of comments for the specific post
+    const postIndex = this.listPostsCov.findIndex((post) => post.id === parseInt(postId));
+    if (postIndex !== -1) {
+      this.listPostsCov[postIndex].postComments.unshift(comment);
+    }
   });
-  this.comment.comment_text = null;
+
+  // Reset the comment input field for the specific post
+  this.newCommentText[postId] = '';
 }
 
 

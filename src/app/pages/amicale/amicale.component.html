@@ -1,0 +1,113 @@
+<div class="content">
+    <div class=" row">
+        <div class=" col-md-12">
+            <form >
+                <!-- <input type="hidden" name="userId" value="{{ currentUser.id }}"> -->
+                <div class="create-post-container">
+                    <!-- <img class="profile-pic" src="{{currentUser.profilePic}}" alt="Profile Picture"> -->
+                    <h3 class="create-post-user">{{currentUser.username}}</h3>
+                </div>
+                <div class=" row">
+
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> description </label>
+                            <input class=" form-control" placeholder="description " type="text"
+                            [(ngModel)]="activiteAmicale.description" />
+                        </div>
+                    </div>
+                    <div class=" col-md-3 px-md-1">
+                        <div class=" form-group">
+                            <label> enseigne  </label>
+                            <input class=" form-control" placeholder="enseigne " type="text"
+                            [(ngModel)]="activiteAmicale.enseigne" />
+                        </div>
+                    </div>
+                  
+
+                    <div class=" col-md-4 pr-md-1" style="width:150px ;padding-left: 10px; padding-right: 30px;">
+                        <label> cathegorie </label>
+                        <select name="dropdownOption" id="dropdownOption"
+                            class='form-control  dropdown-danger dropdown-menu-right '
+                            [(ngModel)]="activiteAmicale.cathegorie"   required name="typeVente">
+                            <option class="dropdown-item" value="ConventionRestauration">ConventionRestauration</option>
+                            <option class="dropdown-item" value="ConventionHotels">ConventionHotels</option>
+                            <option class="dropdown-item" value="Evennement">Evennement</option>
+                            <option class="dropdown-item" value="VoyageOrganisee">VoyageOrganisee</option>
+
+                        </select>
+                    </div>
+                  
+                 
+
+                    <input style="padding-top: 35px; margin-left: 20px;  " type="file" name="file" (change)="selectFile($event)">
+                </div>
+              
+
+                <button style="background: none;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
+                    margin-left: 10px;" type="submit" (click)="upload(activiteAmicale)" >Post</button>
+            </form>
+
+
+            <div *ngFor="let aa of listeActiviteAmicale">
+                <div class=" card post">
+                    <div class="post-header">
+
+                        <h3>{{ aa.user.username }}</h3>
+                        <!-- <p>{{ covoiturage.datePost | date: 'medium' }}</p> -->
+                    </div>
+                    <div class="post-content">
+                        <p>bonjour ,
+                          
+                            <br> {{ aa.description }}
+                        </p>
+                    </div>
+                    <div class="post-pictures">
+                        <div *ngFor="let picture of aa.picturesAmicales">
+                            <img [src]="'data:image/jpeg;base64,' + picture.data" height="100" width="100"
+                            height="100" width="150" class="img-fluid">
+                        </div>
+                    </div>
+                    
+                    <div class="post-reactions" >
+                        
+                        <div class="reactions">
+                            <button (click)="addReaction(aa.id,'😀')"> <span class="emoji">😀</span> {{ aa.likeCount }}</button>
+                            <button (click)="addReaction(aa.id,'😍')"><span class="emoji">😍</span> {{ aa.loveCount }}</button>
+                            <button (click)="addReaction(aa.id,'👍')"><span class="emoji">👍</span> {{ aa.thumbsUpCount }}</button>
+                            <button (click)="addReaction(aa.id,'👎')"><span class="emoji">👎</span> {{ aa.thumbsDownCount }}</button>
+                            <button (click)="addReaction(aa.id,'🎉')"><span class="emoji">🎉</span> {{ aa.celebrationCount }}</button>
+                          </div>
+                          
+
+                    </div>
+                    <div class="post-comments">
+                        <div *ngFor="let comment of aa.AAcomment" class="comment comment-separator">
+                            <!-- <img [src]="comment.user.profilePic" class="profile-pic"> -->
+                            <div class="comment-content">
+                                <h4>{{comment.comment_author }}</h4>
+                                <p style="float: right;">{{ comment.comment_date | date: 'medium' }}</p>
+                                <h5>{{ comment.comment_text }}</h5>
+                            </div>
+                            <hr>
+                        </div>
+                        
+                    </div>
+                    <div class="post-add-comment">
+                        <form >
+                            <input class=" form-control" type="text" [(ngModel)]="newCommentText[aa.id]"
+                                placeholder="Add a comment...">
+                            <button style="background-color: transparent;  border: none; cursor: pointer;  font-size: 16px;  color: #ffffff;
+                            display: inline;"  (click)="addComment(aa.id,newCommentText[aa.id])" type="submit">Post</button>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

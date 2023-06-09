@@ -19,8 +19,9 @@ import { VenteachatComponent } from './pages/venteachat/venteachat.component';
 import { NouvelleventeComponent } from './pages/nouvellevente/nouvellevente.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { VenteComponent } from './pages/vente/vente.component';
-
-
+import { AmicaleComponent } from './pages/amicale/amicale.component';
+import { BonPlanComponent } from './pages/bon-plan/bon-plan.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -31,9 +32,10 @@ import { VenteComponent } from './pages/vente/vente.component';
     RouterModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, PostsComponent, VenteachatComponent, NouvelleventeComponent, VenteComponent],
+  declarations: [AppComponent, AdminLayoutComponent, AuthLayoutComponent, PostsComponent, VenteachatComponent, NouvelleventeComponent, VenteComponent, AmicaleComponent, BonPlanComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })

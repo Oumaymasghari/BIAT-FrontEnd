@@ -1,0 +1,159 @@
+
+<div class=" content">
+    <div class=" row">
+      
+        
+
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title" style="color: rgb(219, 122, 42);font-weight : bold;">les meilleurs restaurents</h4>
+          </div>
+          <div class=" card-body">
+            <div >
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>                
+                    <th >classement</th>
+                    
+                    <th>enseigne </th>             
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let res of sortedrestaurents ; let i = index" >
+                    
+                    <td>{{ i + 1 }}</td>
+                   
+                    <td>{{res.enseigne}}</td>
+                    
+                  
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      
+
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title" style="color: rgb(219, 122, 42);font-weight : bold;">les meilleurs hotels </h4>
+          </div>
+          <div class=" card-body">
+            <div >
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                 
+                    <th>classement</th>                   
+                    <th>enseigne </th>
+                   </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor='let ht of hotels'>
+                    
+                    <td  id="numerotation"></td>
+                   
+                    <td>{{ht.enseigne}}</td>
+                    
+                  
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title" style="color: rgb(219, 122, 42);font-weight : bold;">les meilleurs companies d'evennements</h4>
+          </div>
+          <div class=" card-body">
+            <div >
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                 
+                    <th>classement</th>
+                    
+                    <th>enseigne </th>
+                    
+           
+               
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let ev of evennements'>
+                    
+                    <td  id="numerotation"></td>
+                   
+                    <td>{{ev.enseigne}}</td>
+                    
+                  
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class=" col-md-12">
+        <div class=" card">
+          <div class=" card-header">
+            <h4 class=" card-title" style="color: rgb(219, 122, 42);font-weight : bold;">les meilleurs companies des voyages Organisées</h4>
+          </div>
+          <div class=" card-body">
+            <div >
+              <table class=" table tablesorter" id="">
+                <thead class=" text-primary">
+                  <tr>
+                 
+                    <th>classement</th>
+                    
+                    <th>enseigne </th>
+                    
+           
+               
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor='let voy of voyageOrganisees'>
+                    
+                    <td></td>
+                   
+                    <td>{{voy.enseigne}}</td>
+                    
+                  
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+    </div>
+  </div>
